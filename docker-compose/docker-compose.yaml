@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  
+  # https://localhost:9443/ibmmq/console
+  # UserId/Password : admin/passw0rd
+  ibm-mq:
+    image: ibmcom/mq
+    environment:
+      LICENSE: accept
+      MQ_QMGR_NAME: QM1
+    ports:
+      - "1414:1414"
+      - "9443:9443"
+    container_name: ibm-mq
+    restart: unless-stopped
+  
+  rabbitmq:
+    image: rabbitmq:3
+    hostname: my-rabbit
+    ports:
+      - "5672:5672"
+    container_name: some-rabbit
+    restart: unless-stopped
